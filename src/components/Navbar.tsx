@@ -6,7 +6,6 @@ import { useIsMobile } from '@/hooks/use-mobile';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const isMobile = useIsMobile();
 
   const scrollToSection = (sectionId: string) => {
@@ -15,25 +14,11 @@ const Navbar = () => {
     setIsMenuOpen(false);
   };
 
-  // Handle scroll effect for navbar
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <nav 
-      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white/90 backdrop-blur-md shadow-sm' 
-          : 'bg-transparent'
-      }`}
+    className="fixed top-0 z-50 w-full transition-all duration-300 bg-[#F4F9F4] shadow-sm"
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo/Brand */}
           <div className="font-montserrat font-bold text-farm-primary text-xl md:text-2xl">
@@ -70,7 +55,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation - Fixed full screen overlay */}
         {isMobile && isMenuOpen && (
-          <div className="fixed inset-0 bg-white z-50 flex flex-col pt-20 px-4">
+          <div className="fixed inset-0 bg-white z-50 flex flex-col pt-20 px-4 w-10/12 max-w-xs right-0 ml-auto rounded-l-2xl shadow-lg">
             <div className="absolute top-4 right-4">
               <Button
                 variant="ghost"
